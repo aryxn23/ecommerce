@@ -203,6 +203,10 @@ app.post('/create-checkout-session', async (req, res) => {
     res.json({ session });
 });
 
+app.get('/test', (req, res) => {
+  res.send('it is working');
+});
+
 app.get("/", (req, res) => {
     res.send("Hello");
 })
