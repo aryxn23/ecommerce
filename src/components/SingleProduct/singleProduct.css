@@ -1,0 +1,155 @@
+.singleProductContainer {
+    width: 70%;
+    margin: 50px auto 50px;
+    display: flex;
+    flex-direction: row;
+}
+
+.singleProductImage {
+    flex: 1;
+}
+
+.singleProductImage img {
+    background-color: rgba(0, 0, 0, 0.05);
+    max-width: 100%;
+}
+
+.singleProductDetails {
+    flex: 1;
+    padding: 0 20px;
+}
+
+.singleProductDetails .title,
+.singleProductDetails .price {
+    font-family: Roboto;
+    font-weight: bolder;
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+.singleProductDetails .description {
+    font-size: .75rem;
+    line-height: 17.5px;
+    /* margin-bottom: 7.5px; */
+    color: rgba(0, 0, 0, 0.85);
+    line-height: 1.5;
+}
+
+.singleProductDetails .availability {
+    display: flex;
+    margin-top: 30px;
+}
+
+.availability .counter {
+    display: flex;
+    margin-right: 30px;
+}
+
+.counter .minus,
+.counter .plus {
+    border: solid 1px black;
+    cursor: pointer;
+    padding: 7.5px 10px;
+}
+
+.counter .quantity {
+    border-top: solid 1px black;
+    border-bottom: solid 1px black;
+    padding: 7.5px 15px;
+}
+
+.availability button {
+    padding-top: 7.5px;
+    padding-bottom: 5px;
+    color: white;
+    background-color: rgba(74, 0, 224, 0.8);
+}
+
+.availability .bi-heart {
+    width: 42px;
+    height: 42px;
+    margin-left: 25px;
+    /* margin-top: 3px; */
+    cursor: pointer;
+}
+
+.item-category {
+    display: flex;
+    flex-direction: row;
+    margin-top: 35px;
+}
+
+.item-category .title,
+.item-share .title {
+    font-size: 0.75rem;
+    margin-right: 5px;
+}
+
+.item-share {
+    display: flex;
+    flex-direction: row;
+}
+
+.related-products {
+    width: 70%;
+    font-family: Roboto;
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin: 75px auto -10px;
+    padding-bottom: 5px;
+    border-bottom: 3px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(to right, #4a00e0 4.25%, transparent 0%);
+}
+
+@media only screen and (max-width: 768px) {
+
+    .singleProductContainer {
+        width: 92.5%;
+        margin: 5% auto 10%;
+        flex-direction: column;
+    }
+
+    .singleProductDetails {
+        flex: 1;
+        padding: 0;
+        margin-top: 20px;
+    }
+
+    .singleProductDetails .title,
+    .singleProductDetails .price {
+        margin-bottom: 12.5px;
+    }
+
+    .related-products {
+        width: 92.5%;
+        margin: 0px auto 25px;
+    }
+
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+
+    .singleProductContainer {
+        width: 90%;
+        flex-direction: column;
+    }
+
+
+    .singleProductImage img {
+        background-color: rgba(0, 0, 0, 0.05);
+        width: 100%;
+    }
+
+    .singleProductDetails {
+        margin: 40px auto 0px;
+        padding: 0;
+    }
+
+    .related-products {
+        width: 90%;
+        margin: 0 auto 25px;
+    }
+
+}

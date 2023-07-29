@@ -1,0 +1,39 @@
+.wishlist-container {
+    max-height: 100%;
+    overflow: auto;
+    padding-bottom: 15px;
+}
+
+.close-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.animated-div .popular {
+    margin-top: 60px;
+}
+
+@media screen and (max-width: 640px) {
+    .wishlist-container {
+        padding-bottom: 70px;
+    }
+}
+
+/* Styles for tablets (landscape orientation) */
+@media screen and (min-width: 641px) and (max-width: 1023px) {
+
+    .wishlist-container {
+        padding-bottom: 400px;
+    }
+    
+  }
+  
+
+@media screen and (min-width: 1024px) {
+
+    .animated-div .popular {
+        margin-bottom: -15px;
+    }
+}

@@ -1,0 +1,153 @@
+body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: inherit;
+    line-height: 1;
+    background: transparent;
+    font-family: "Montserrat";
+}
+
+.banner {
+    background-image: linear-gradient(to right, #8e2de2, #4a00e0);
+    /* background: #8e2de2; */
+    height: 99.5vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.banner-info,
+.banner-img {
+    flex: 1;
+}
+
+.banner-info h1,
+p,
+a {
+    color: white;
+}
+
+.banner-info {
+    margin-left: 17.5%;
+    margin-right: 5%;
+}
+
+.banner-text {
+    margin-top: 42.5%;
+    text-align: center;
+}
+
+.banner-text h1 {
+    display: block;
+    width: 100%;
+    font-size: 9rem;
+    margin-bottom: -1.5%;
+}
+
+.banner-tags {
+    margin-top: 10%;
+    text-align: center;
+}
+
+.banner-tags a {
+    text-decoration: none;
+    outline: 2px solid white;
+    margin: 0% 2%;
+    padding: 1.75% 4%;
+    transition: opacity 0.3s;
+}
+
+.banner-tags a:hover {
+    color: white;
+    opacity: 0.8;
+}
+
+.banner-img {
+    margin-right: 17.5%;
+}
+
+.banner-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+@media only screen and (max-width: 728px) {
+
+    .banner {
+        width: 100%;
+        height: 650px;
+        flex-direction: column;
+    }
+
+    .banner-img {
+        margin: 10% auto 0%;
+        width: 65%;
+    }
+
+    .banner-info {
+        order: 2;
+        margin: 7.5% 7% 0%;
+    }
+
+    .banner-text {
+        margin: -7.5% auto 12.5%;
+    }
+
+    .banner-text h1 {
+        font-size: 4.5rem;
+        margin-bottom: 0%;
+    }
+
+    .banner-tags {
+        margin: 5% 0% 0%;
+    }
+
+    .banner-tags a {
+        text-decoration: none;
+        outline: 2px solid white;
+        margin: 0% 3%;
+        padding: 4%;
+    }
+
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+
+    .banner {
+        width: 100%;
+        height: 61vh;
+        flex-direction: column;
+    }
+
+    .banner-img {
+        margin: 7.5% auto 0%;
+        width: 85%;
+        height: 30vh;
+    }
+
+    .banner-img img {
+        height: 100%;
+    }
+
+    .banner-info {
+        order: 2;
+        margin: 5% 7% 0%;
+    }
+
+    .banner-text {
+        margin: -7.5% auto 8.5%;
+    }
+
+    .banner-text h1 {
+        font-size: 4.5rem;
+        margin-bottom: 0%;
+    }
+
+    .banner-tags {
+        margin: 0%;
+    }
+
+}

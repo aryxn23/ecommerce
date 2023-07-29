@@ -1,0 +1,202 @@
+@keyframes slideIn {
+    0% {
+        transform: translateY(100%);
+    }
+
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+@keyframes slideOut {
+    0% {
+        transform: translateY(0%);
+    }
+
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+.full-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    z-index: 9999;
+    display: flex;
+    animation: slideIn 0.5s forwards;
+}
+
+.animated-div {
+    width: 100%;
+    background-color: #f2f2f2;
+    padding: 20px;
+    position: relative;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    height: 100px;
+    border-bottom: 1px solid #ddd;
+}
+
+.search-bar form {
+    width: 40%;
+    font-family: Roboto;
+    font-weight: 500;
+    height: 100%;
+    margin-right: 10px;
+}
+
+.search-bar input {
+    width: 100%;
+    margin-top: 2.5%;
+    height: 75%;
+    font-size: 2.5rem;
+    border: none;
+    font-family: Roboto;
+    text-align: center;
+    font-weight: 500;
+    border-radius: 5px;
+    background-color: inherit;
+}
+
+.search-bar input:focus {
+    outline: none;
+}
+
+.search-bar .MuiSvgIcon-root {
+    cursor: pointer;
+    position: absolute;
+    left: 90%;
+}
+
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px;
+    background-color: #f2f2f2;
+    border: none;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    background-color: #e0e0e0;
+}
+
+@media only screen and (max-width: 768px) {
+
+    .search-bar form {
+        width: 95%;
+    }
+
+    .search-bar input {
+        font-size: 1.4rem;
+    }
+
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+
+    .search-bar form {
+        width: 75%;
+    }
+
+    .search-bar input {
+        font-size: 1.75rem;
+    }
+}
+
+
+/* CSS for Search Items */
+
+.container-items {
+    width: 50%;
+    margin: 25px auto 0px;
+}
+
+.search-item {
+    display: flex;
+    height: 75px;
+    border-bottom: 1px solid #ddd;
+    padding: 7.5px 0px;
+    cursor: pointer;
+}
+
+.search-item img {
+    background-color: rgba(0, 0, 0, 0.05);
+    margin-right: 7.5px;
+}
+
+.search-item .item-info {
+    height: 70%;
+    margin: auto;
+}
+
+/* .item-info .item-title {
+    font-family: Roboto;
+    font-weight: bold;
+    margin-bottom: 10px;
+} */
+
+.item-info .item-title {
+    font-family: Roboto;
+    font-weight: bold;
+    margin-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.item-info .item-description {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 0.85rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+@media only screen and (max-width: 768px) {
+
+    .container-items {
+        width: 95%;
+        margin: 25px auto 0px;
+    }
+
+    .item-info .item-title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+
+    .container-items {
+        width: 75%;
+        margin: 25px auto 0px;
+    }
+
+    .item-info .item-title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+    }
+
+}
