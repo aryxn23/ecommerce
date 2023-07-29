@@ -104,10 +104,25 @@ const Header = () => {
             });
     }
 
+   
     const handleSearch = () => {
+
+        fetch(`${process.env.REACT_APP_URL}/test`)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text(); 
+            })
+            .then((data) => {
+                console.log('Backend Response:', data); // Should log "it is working"
+            })
+            .catch((error) => {
+                console.error('Error during search:', error);
+            });
+
         setSearch(true);
     }
-
     const handleWishlist = () => {
         if (!loggedIn)
             return alert("Login First!");
