@@ -195,8 +195,8 @@ app.post('/create-checkout-session', async (req, res) => {
             },
         ],
         mode: 'payment',
-        success_url: "http://localhost:3000/success",
-        cancel_url: "http://localhost:3000",
+        success_url: "https://ecommerce-deploy-lft5.vercel.app/success",
+        cancel_url: "https://ecommerce-deploy-lft5.vercel.app",
     });
 
     res.json({ session });
