@@ -36,7 +36,6 @@ export const login = async (req, res) => {
         if (isMatch) {
             jwt.sign({ email, id: user._id }, secret, {}, (err, token) => {
                 if (err) throw err;
-                console.log("token: " + token);
                 res.cookie("token", token).json("ok");
 
             });
@@ -51,9 +50,7 @@ export const login = async (req, res) => {
 
 // Verifying
 export const verify = (req, res) => {
-  // console.log("Triggered");
-    const { token } = req.cookies;
-    console.log("Verify token: " + token);    try {
+    try {
         const { token } = req.cookies;
         const decodedToken = jwt.verify(token, secret);
         res.json(decodedToken);
