@@ -50,6 +50,7 @@ export const login = async (req, res) => {
 
 // Verifying
 export const verify = (req, res) => {
+    console.log("Triggered");
     try {
         const { token } = req.cookies;
         const decodedToken = jwt.verify(token, secret);
