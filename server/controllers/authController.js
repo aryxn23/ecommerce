@@ -36,6 +36,7 @@ export const login = async (req, res) => {
         if (isMatch) {
             jwt.sign({ email, id: user._id }, secret, {}, (err, token) => {
                 if (err) throw err;
+                console.log("token: " + token);
                 res.cookie("token", token).json("ok");
 
             });
