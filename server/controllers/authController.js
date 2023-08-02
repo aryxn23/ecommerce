@@ -36,8 +36,8 @@ export const login = async (req, res) => {
         if (isMatch) {
             jwt.sign({ email, id: user._id }, secret, {}, (err, token) => {
                 if (err) throw err;
-                res.cookie("token", token).json("ok");
-
+                // res.cookie("token", token).json("ok");
+                 res.cookie("token", token, { secure: true, httpOnly: true }).json("ok");
             });
         } else {
             return res.status(400).json({ msg: "Invalid credentials. " });
