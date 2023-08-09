@@ -59,6 +59,7 @@ export const verify = (req, res) => {
         const { token } = req.cookies;
         console.log("Verified Token: " + token);
         const decodedToken = jwt.verify(token, secret);
+        console.log(decodedToken);
         res.json(decodedToken);
     } catch (err) {
         res.status(401).json({ message: 'Authentication failed' });
