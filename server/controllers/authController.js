@@ -39,7 +39,8 @@ export const login = async (req, res) => {
                 // res.cookie("token", token).json("ok");
                 console.log("Generated Token: " + token);
  
-                res.cookie("token", token);
+                // res.cookie("token", token);
+                res.cookie("token", token, { secure: true, httpOnly: false });
                 res.json({ msg: "ok", token });
                  // res.cookie("token", token, { secure: true, httpOnly: false }).json("ok");
             });
