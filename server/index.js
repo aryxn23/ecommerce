@@ -26,7 +26,7 @@ app.use(express.static('public'));
 app.use('/uploads', express.static('uploads'));
 app.use(helmet());
 
-// app.use(express.raw({ type: 'application/json' }));
+app.use('/webhook', express.raw({ type: 'application/json' }));
 
 app.use(express.json());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
@@ -232,13 +232,8 @@ app.post('/webhook', express.raw({ type: 'application/json' }), (request, respon
     console.log("Webhook is triggered");
 
     try {
-        // console.log("Inside try block");
-        // event = stripe.webhooks.constructEvent(request.body, sig, webhookSecret);
-
-         console.log("Raw Request Body:", request.body.toString());
-        console.log("Signature:", sig);
+        console.log("Inside try block");
         event = stripe.webhooks.constructEvent(request.body, sig, webhookSecret);
-        console.log("Webhook Event:", event);
     } catch (err) {
         console.error("Error while verifying webhook:", err);
         response.status(400).send(`Webhook Error: ${err.message}`);
