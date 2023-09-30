@@ -23,9 +23,12 @@ const app = express();
 
 // Middleware
 app.use(express.static('public'));
-app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 app.use(helmet());
+
+app.use(express.raw({ type: 'application/json' }));
+
+app.use(express.json());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
