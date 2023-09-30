@@ -173,9 +173,6 @@ app.post('/create-checkout-session', async (req, res) => {
 
     const { user, subtotal } = req.body;
 
-    console.log("subtotal: " + subtotal);
-    console.log(user);
-
     const product = await stripe.products.create({
         name: 'Your Product Name',
         description: 'Your Product Description',
@@ -202,12 +199,14 @@ app.post('/create-checkout-session', async (req, res) => {
     res.json({ session });
 });
 
-const webhookSecret = "whsec_FUROGEao7v6oe45VMzYrpDFEjmirwSvQ";
-
 app.post('/webhook', async (req, res) => {
+    const webhookSecret = "whsec_FUROGEao7v6oe45VMzYrpDFEjmirwSvQ";
+    
     const sig = req.headers['stripe-signature'];
     let event;
 
+    console.log("Webhook is triggered");
+    
     try {
         event = stripe.webhooks.constructEvent(req.rawBody, sig, webhookSecret);
     } catch (err) {
@@ -220,11 +219,6 @@ app.post('/webhook', async (req, res) => {
     }
 
     res.json({ received: true });
-});
-
-
-app.get('/test', (req, res) => {
-  res.send('it is working');
 });
 
 app.get("/", (req, res) => {
