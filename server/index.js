@@ -233,7 +233,7 @@ app.post('/webhook', express.raw({type: 'application/json'}), (request, response
       console.log("Inside try block");
     event = stripe.webhooks.constructEvent(request.body, sig, webhookSecret);
   } catch (err) {
-      console.log("Inside catch block");
+    console.error("Error while verifying webhook:", err);
     response.status(400).send(`Webhook Error: ${err.message}`);
     return;
   }
