@@ -199,26 +199,51 @@ app.post('/create-checkout-session', async (req, res) => {
     res.json({ session });
 });
 
-app.post('/webhook', async (req, res) => {
-    const webhookSecret = "whsec_FUROGEao7v6oe45VMzYrpDFEjmirwSvQ";
+// app.post('/webhook', async (req, res) => {
+//     const webhookSecret = "whsec_FUROGEao7v6oe45VMzYrpDFEjmirwSvQ";
     
-    const sig = req.headers['stripe-signature'];
-    let event;
+//     const sig = req.headers['stripe-signature'];
+//     let event;
 
-    console.log("Webhook is triggered");
+//     console.log("Webhook is triggered");
     
-    try {
-        event = stripe.webhooks.constructEvent(req.rawBody, sig, webhookSecret);
-    } catch (err) {
-        return res.status(400).send(`Webhook Error: ${err.message}`);
-    }
+//     try {
+//         event = stripe.webhooks.constructEvent(req.rawBody, sig, webhookSecret);
+//     } catch (err) {
+//         return res.status(400).send(`Webhook Error: ${err.message}`);
+//     }
 
-    if (event.type === 'payment_intent.succeeded') {
-        const session = event.data.object;
-        console.log(`Payment was successful for session ${session.id}`);
-    }
+//     if (event.type === 'payment_intent.succeeded') {
+//         const session = event.data.object;
+//         console.log(`Payment was successful for session ${session.id}`);
+//     }
 
-    res.json({ received: true });
+//     res.json({ received: true });
+// });
+
+app.post('/webhook', express.raw({type: 'application/json'}), (request, response) => {
+  const sig = request.headers['stripe-signature'];
+
+  let event;
+
+  try {
+    event = stripe.webhooks.constructEvent(request.body, sig, webhookSecret);
+  } catch (err) {
+    response.status(400).send(`Webhook Error: ${err.message}`);
+    return;
+  }
+
+  // Handle the event
+  switch (event.type) {
+    case 'payment_intent.succeeded':
+          console.log("Payment Successful");
+          const paymentIntentSucceeded = event.data.object;
+          break;
+    default:
+      console.log(`Unhandled event type ${event.type}`);
+  }
+
+    respnse.json({ received: true })
 });
 
 app.get("/", (req, res) => {
