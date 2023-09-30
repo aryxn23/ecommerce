@@ -202,6 +202,27 @@ app.post('/create-checkout-session', async (req, res) => {
     res.json({ session });
 });
 
+const webhookSecret = "whsec_FUROGEao7v6oe45VMzYrpDFEjmirwSvQ";
+
+app.post('/webhook', async (req, res) => {
+    const sig = req.headers['stripe-signature'];
+    let event;
+
+    try {
+        event = stripe.webhooks.constructEvent(req.rawBody, sig, webhookSecret);
+    } catch (err) {
+        return res.status(400).send(`Webhook Error: ${err.message}`);
+    }
+
+    if (event.type === 'checkout.session.completed') {
+        const session = event.data.object;
+        console.log(`Payment was successful for session ${session.id}`);
+    }
+
+    res.json({ received: true });
+});
+
+
 app.get('/test', (req, res) => {
   res.send('it is working');
 });
