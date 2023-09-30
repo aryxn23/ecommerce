@@ -213,7 +213,7 @@ app.post('/webhook', async (req, res) => {
         return res.status(400).send(`Webhook Error: ${err.message}`);
     }
 
-    if (event.type === 'checkout.session.completed') {
+    if (event.type === 'payment_intent.succeeded') {
         const session = event.data.object;
         console.log(`Payment was successful for session ${session.id}`);
     }
