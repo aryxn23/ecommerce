@@ -32,27 +32,14 @@ app.use(express.json());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-// app.use(cors({
-//     credentials: true,
-//     origin: "http://localhost:3000"
-// }));
 
 app.use(cors({
     credentials: true,
     origin: "https://ecommerce-deploy-lft5.vercel.app"
 }));
 
-// app.use(cors({
-//     credentials: true,
-// }));
-
-// app.use(cors({
-//     credentials: true,
-//     origin: "https://checkout.stripe.com",
-// }));
 app.use(cookieParser());
 
-// Connecting To Mongoose
 const MONGODB_URI = "mongodb+srv://ecommerceDB:2JD445YpeVJX8xxh@cluster0.c1qeutt.mongodb.net/?retryWrites=true&w=majority"
 mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true,
@@ -183,7 +170,7 @@ app.post('/create-checkout-session', async (req, res) => {
 
     const price = await stripe.prices.create({
         product: product.id,
-        unit_amount: subtotal * 100, // Pass the actual price amount in the smallest currency unit (e.g., cents)
+        unit_amount: subtotal * 100,
         currency: 'inr',
     });
 
@@ -202,29 +189,6 @@ app.post('/create-checkout-session', async (req, res) => {
     res.json({ session });
 });
 
-// app.post('/webhook', async (req, res) => {
-//     const webhookSecret = "whsec_FUROGEao7v6oe45VMzYrpDFEjmirwSvQ";
-    
-//     const sig = req.headers['stripe-signature'];
-//     let event;
-
-//     console.log("Webhook is triggered");
-    
-//     try {
-//         event = stripe.webhooks.constructEvent(req.rawBody, sig, webhookSecret);
-//     } catch (err) {
-//         return res.status(400).send(`Webhook Error: ${err.message}`);
-//     }
-
-//     if (event.type === 'payment_intent.succeeded') {
-//         const session = event.data.object;
-//         console.log(`Payment was successful for session ${session.id}`);
-//     }
-
-//     res.json({ received: true });
-// });
-
-
 app.post('/webhook', express.raw({ type: 'application/json' }), (request, response) => {
     const sig = request.headers['stripe-signature'];
     const webhookSecret = "whsec_FUROGEao7v6oe45VMzYrpDFEjmirwSvQ";
@@ -242,7 +206,6 @@ app.post('/webhook', express.raw({ type: 'application/json' }), (request, respon
         return;
     }
 
-    // Handle the event
     switch (event.type) {
         case 'payment_intent.succeeded':
             console.log("Payment Successful");
