@@ -221,35 +221,35 @@ app.post('/create-checkout-session', async (req, res) => {
 //     res.json({ received: true });
 // });
 
-app.post('/webhook', express.raw({type: 'application/json'}), (request, response) => {
+
+app.post('/webhook', express.raw({ type: 'application/json' }), (request, response) => {
     const sig = request.headers['stripe-signature'];
     const webhookSecret = "whsec_FUROGEao7v6oe45VMzYrpDFEjmirwSvQ";
 
-  let event;
-
     console.log("Webhook is triggered");
 
-  try {
-      console.log("Inside try block");
-    event = stripe.webhooks.constructEvent(request.body, sig, webhookSecret);
-  } catch (err) {
-    console.error("Error while verifying webhook:", err);
-    response.status(400).send(`Webhook Error: ${err.message}`);
-    return;
-  }
+    try {
+        console.log("Inside try block");
+        event = stripe.webhooks.constructEvent(request.body, sig, webhookSecret);
+    } catch (err) {
+        console.error("Error while verifying webhook:", err);
+        response.status(400).send(`Webhook Error: ${err.message}`);
+        return;
+    }
 
-  // Handle the event
-  switch (event.type) {
-    case 'payment_intent.succeeded':
-          console.log("Payment Successful");
-          const paymentIntentSucceeded = event.data.object;
-          break;
-    default:
-      console.log(`Unhandled event type ${event.type}`);
-  }
+    // Handle the event
+    switch (event.type) {
+        case 'payment_intent.succeeded':
+            console.log("Payment Successful");
+            const paymentIntentSucceeded = event.data.object;
+            break;
+        default:
+            console.log(`Unhandled event type ${event.type}`);
+    }
 
-    respnse.json({ received: true })
+    response.json({ received: true });
 });
+
 
 app.get("/", (req, res) => {
     res.send("Hello");
