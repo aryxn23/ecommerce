@@ -26,7 +26,7 @@ app.use(express.static('public'));
 app.use('/uploads', express.static('uploads'));
 app.use(helmet());
 
-app.use(express.raw({ type: 'application/json' }));
+// app.use(express.raw({ type: 'application/json' }));
 
 app.use(express.json());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
