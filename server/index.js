@@ -232,8 +232,13 @@ app.post('/webhook', express.raw({ type: 'application/json' }), (request, respon
     console.log("Webhook is triggered");
 
     try {
-        console.log("Inside try block");
+        // console.log("Inside try block");
+        // event = stripe.webhooks.constructEvent(request.body, sig, webhookSecret);
+
+         console.log("Raw Request Body:", request.body.toString());
+        console.log("Signature:", sig);
         event = stripe.webhooks.constructEvent(request.body, sig, webhookSecret);
+        console.log("Webhook Event:", event);
     } catch (err) {
         console.error("Error while verifying webhook:", err);
         response.status(400).send(`Webhook Error: ${err.message}`);
