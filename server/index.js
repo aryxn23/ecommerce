@@ -231,6 +231,8 @@ app.post('/webhook', express.raw({ type: 'application/json' }), (request, respon
 
     console.log("Webhook is triggered");
 
+    let event;
+
     try {
         console.log("Inside try block");
         event = stripe.webhooks.constructEvent(request.body, sig, webhookSecret);
