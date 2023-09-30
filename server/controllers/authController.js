@@ -73,9 +73,8 @@ export const verify = (req, res) => {
 
         const token = req.header('Authorization')?.split(' ')[1]; // Get the token from the Authorization header
 
-        console.log("verified token: " + token);
         const decodedToken = jwt.verify(token, secret);
-        console.log(decodedToken);
+        // console.log(decodedToken);
         res.json(decodedToken);
     } catch (err) {
         res.status(401).json({ message: 'Authentication failed' });
