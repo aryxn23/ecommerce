@@ -236,6 +236,22 @@ app.post('/webhook', express.raw({ type: 'application/json' }), (request, respon
     response.json({ received: true });
 });
 
+const generateOrderId = () => {
+    const characters = '0123456789';
+    const hyphen = '-';
+    let orderId = '';
+
+    for (let i = 0; i < 12; i++) {
+        if (i % 4 === 0 && i !== 0) {
+            orderId += hyphen;
+        }
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        orderId += characters.charAt(randomIndex);
+    }
+
+    return orderId;
+};
+
 
 const updateOrders = async (userEmail, totalAmount) => {
     try {
@@ -247,7 +263,10 @@ const updateOrders = async (userEmail, totalAmount) => {
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
         const orderDate = today.toLocaleDateString(undefined, options);
 
+        const orderId = generateOrderId();
+
         const newOrder = {
+            orderId: orderId,
             orderDate: orderDate,
             totalAmount: totalAmount,
             productDetails: userCart
