@@ -186,16 +186,16 @@ app.post('/create-checkout-session', async (req, res) => {
         mode: 'payment',
         success_url: "https://ecommerce-deploy-lft5.vercel.app/success",
         cancel_url: "https://ecommerce-deploy-lft5.vercel.app",
-         metadata:{
-    "userEmail": userEmail,
-             "subtotal": subtotal
-  },
-  payment_intent_data:{
-    "metadata": {
-      "userEmail": userEmail,
-        "subtotal": subtotal
-    }
-  }
+        metadata: {
+            "userEmail": userEmail,
+            "subtotal": subtotal
+        },
+        payment_intent_data: {
+            "metadata": {
+                "userEmail": userEmail,
+                "subtotal": subtotal
+            }
+        }
     });
 
 
@@ -224,9 +224,10 @@ app.post('/webhook', express.raw({ type: 'application/json' }), (request, respon
             console.log("Payment Successful");
             const paymentIntentSucceeded = event.data.object;
             console.log(paymentIntentSucceeded);
-            const { userEmail, subtotal } = paymentIntentSucceeded.metadata;            
-             console.log(`userEmail: ${userEmail}`);
+            const { userEmail, subtotal } = paymentIntentSucceeded.metadata;
+            console.log(`userEmail: ${userEmail}`);
             console.log("subtotal: " + subtotal);
+            updateOrders(userEmail, subtotal);
             break;
         default:
             console.log(`Unhandled event type ${event.type}`);
@@ -234,6 +235,36 @@ app.post('/webhook', express.raw({ type: 'application/json' }), (request, respon
 
     response.json({ received: true });
 });
+
+
+const updateOrders = async (userEmail, totalAmount) => {
+    try {
+        const user = await User.findOne({ email: userEmail });
+
+        const userCart = user.cart;
+
+        const today = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const orderDate = today.toLocaleDateString(undefined, options);
+
+        const newOrder = {
+            orderDate: orderDate,
+            totalAmount: totalAmount,
+            productDetails: userCart
+        }
+
+        console.log(newOrder);
+
+        user.orders.push(newOrder);
+        user.cart = [];
+
+        await user.save();
+
+        console.log(user);
+    } catch (err) {
+        console.log(err);
+    }
+}
 
 
 app.get("/", (req, res) => {
