@@ -163,8 +163,6 @@ app.post('/create-checkout-session', async (req, res) => {
 
     const { userEmail, subtotal } = req.body;
 
-    console.log("User Email: " + userEmail);
-
     const product = await stripe.products.create({
         name: 'Your Product Name',
         description: 'Your Product Description',
@@ -206,8 +204,6 @@ app.post('/webhook', express.raw({ type: 'application/json' }), (request, respon
     const sig = request.headers['stripe-signature'];
     const webhookSecret = "whsec_FUROGEao7v6oe45VMzYrpDFEjmirwSvQ";
 
-    console.log("Webhook is triggered");
-
     let event;
 
     try {
@@ -223,7 +219,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), (request, respon
         case 'payment_intent.succeeded':
             console.log("Payment Successful");
             const paymentIntentSucceeded = event.data.object;
-            console.log(paymentIntentSucceeded);
+            // console.log(paymentIntentSucceeded);
             const { userEmail, subtotal } = paymentIntentSucceeded.metadata;
             console.log(`userEmail: ${userEmail}`);
             console.log("subtotal: " + subtotal);
