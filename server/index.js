@@ -186,8 +186,10 @@ app.post('/create-checkout-session', async (req, res) => {
         mode: 'payment',
         success_url: "https://ecommerce-deploy-lft5.vercel.app/success",
         cancel_url: "https://ecommerce-deploy-lft5.vercel.app",
-        customer:  {userEmail: "aryandahiya@gmail.com"}
+        metadata:  {userEmail: userEmail}
     });
+
+    console.log(session)
 
     res.json({ session });
 });
@@ -214,7 +216,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), (request, respon
             console.log("Payment Successful");
             const paymentIntentSucceeded = event.data.object;
             console.log(paymentIntentSucceeded);
-            const userEmail = paymentIntentSucceeded.customer.userEmail;            
+            const userEmail = paymentIntentSucceeded.metadata.userEmail;            
              console.log(`userEmail: ${userEmail}`);
             break;
         default:
