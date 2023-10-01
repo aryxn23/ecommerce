@@ -161,7 +161,7 @@ app.post('/api/checkout', async (req, res) => {
 
 app.post('/create-checkout-session', async (req, res) => {
 
-    const { userId, subtotal } = req.body;
+    const { userEmail, subtotal } = req.body;
 
     const product = await stripe.products.create({
         name: 'Your Product Name',
@@ -185,7 +185,7 @@ app.post('/create-checkout-session', async (req, res) => {
         success_url: "https://ecommerce-deploy-lft5.vercel.app/success",
         cancel_url: "https://ecommerce-deploy-lft5.vercel.app",
          metadata: {
-            userId: userId
+            userEmail: userEmail
         },
     });
 
@@ -214,8 +214,8 @@ app.post('/webhook', express.raw({ type: 'application/json' }), (request, respon
             console.log("Payment Successful");
             const paymentIntentSucceeded = event.data.object;
 
-             const userId = paymentIntentSucceeded.metadata.userId;
-             console.log(`userId: ${userId}`);
+             const userEmail = paymentIntentSucceeded.metadata.userEmail;
+             console.log(`userEmail: ${userEmail}`);
             break;
         default:
             console.log(`Unhandled event type ${event.type}`);
