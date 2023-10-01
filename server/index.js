@@ -163,6 +163,8 @@ app.post('/create-checkout-session', async (req, res) => {
 
     const { userEmail, subtotal } = req.body;
 
+    console.log("User Email: " + userEmail);
+
     const product = await stripe.products.create({
         name: 'Your Product Name',
         description: 'Your Product Description',
