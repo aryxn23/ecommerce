@@ -215,7 +215,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), (request, respon
             const paymentIntentSucceeded = event.data.object;
 
              const userId = paymentIntentSucceeded.metadata.userId;
-             console.log(`UserId: ${userId}`);
+             console.log(`userId: ${userId}`);
             break;
         default:
             console.log(`Unhandled event type ${event.type}`);
