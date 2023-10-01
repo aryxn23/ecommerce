@@ -186,7 +186,12 @@ app.post('/create-checkout-session', async (req, res) => {
         mode: 'payment',
         success_url: "https://ecommerce-deploy-lft5.vercel.app/success",
         cancel_url: "https://ecommerce-deploy-lft5.vercel.app",
-        metadata:  {userEmail: userEmail}
+        metadata:  {userEmail: userEmail},
+        payment_intent_data={
+        metadata: {
+         userEmail: userEmail,
+    }
+  }
     });
 
     console.log(session)
