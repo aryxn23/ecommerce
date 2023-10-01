@@ -186,16 +186,6 @@ app.post('/create-checkout-session', async (req, res) => {
         mode: 'payment',
         success_url: "https://ecommerce-deploy-lft5.vercel.app/success",
         cancel_url: "https://ecommerce-deploy-lft5.vercel.app",
-
-         metadata={
-    "payment_type": "schedule_visit",
-    "visit_id": "123"
-  },
-  payment_intent_data={
-    "metadata": {
-      "payment_type": "schedule_visit",
-      "visit_id": "123"
-    }
   }
      
     });
