@@ -186,11 +186,8 @@ app.post('/create-checkout-session', async (req, res) => {
         mode: 'payment',
         success_url: "https://ecommerce-deploy-lft5.vercel.app/success",
         cancel_url: "https://ecommerce-deploy-lft5.vercel.app",
-  }
-     
     });
 
-    console.log(session)
 
     res.json({ session });
 });
