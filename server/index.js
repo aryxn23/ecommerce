@@ -214,7 +214,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), (request, respon
             console.log("Payment Successful");
             const paymentIntentSucceeded = event.data.object;
 
-             const user = paymentIntentSucceeded.metadata.userId;
+             const userId = paymentIntentSucceeded.metadata.userId;
              console.log(`UserId: ${userId}`);
             break;
         default:
