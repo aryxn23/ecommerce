@@ -187,13 +187,11 @@ app.post('/create-checkout-session', async (req, res) => {
         success_url: "https://ecommerce-deploy-lft5.vercel.app/success",
         cancel_url: "https://ecommerce-deploy-lft5.vercel.app",
          metadata:{
-    "payment_type": "schedule_visit",
-    "visit_id": "123"
+    "userEmail": userEmail
   },
   payment_intent_data:{
     "metadata": {
-      "payment_type": "schedule_visit",
-      "visit_id": "123"
+      "userEmail": userEmail
     }
   }
     });
@@ -224,8 +222,8 @@ app.post('/webhook', express.raw({ type: 'application/json' }), (request, respon
             console.log("Payment Successful");
             const paymentIntentSucceeded = event.data.object;
             console.log(paymentIntentSucceeded);
-            // const userEmail = paymentIntentSucceeded.metadata.userEmail;            
-             // console.log(`userEmail: ${userEmail}`);
+            const userEmail = paymentIntentSucceeded.metadata.userEmail;            
+             console.log(`userEmail: ${userEmail}`);
             break;
         default:
             console.log(`Unhandled event type ${event.type}`);
