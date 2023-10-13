@@ -47,6 +47,12 @@ mongoose.connect(MONGODB_URI, {
 })
     .then(() => {
         console.log('Connected to MongoDB');
+        // Start the server
+        const port = process.env.PORT;
+        app.listen(port, () => {
+        console.log(`Server is running on port ${port}`);
+});
+
     })
     .catch((error) => {
         console.error('Error connecting to MongoDB:', error);
@@ -285,11 +291,3 @@ const updateOrders = async (userEmail, totalAmount) => {
 app.get("/", (req, res) => {
     res.send("Hello");
 })
-
-// Start the server
-const port = process.env.PORT;
-
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-});
-
