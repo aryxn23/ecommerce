@@ -13,7 +13,8 @@ import products from './data.js';
 import { register, login, verify, logout } from "./controllers/authController.js";
 import Stripe from 'stripe';
 
-const stripe = new Stripe('sk_test_51NOJ90SIKHsVKPDzAElzMcJKIdzUqW8JUInVRhj5tZTaLvICvGu4OTWviuLLGni4nl7XZENh3CNeV2FBmiM9Udu000lut5OExG');
+// const stripe = new Stripe('sk_test_51NOJ90SIKHsVKPDzAElzMcJKIdzUqW8JUInVRhj5tZTaLvICvGu4OTWviuLLGni4nl7XZENh3CNeV2FBmiM9Udu000lut5OExG');
+const stripe = new Stripe(process.env.STRIPE_KEY);
 
 // Load environment variables from a .env file
 dotenv.config();
@@ -40,7 +41,8 @@ app.use(cors({
 
 app.use(cookieParser());
 
-const MONGODB_URI = "mongodb+srv://ecommerceDB:2JD445YpeVJX8xxh@cluster0.c1qeutt.mongodb.net/?retryWrites=true&w=majority"
+// const MONGODB_URI = "mongodb+srv://ecommerceDB:2JD445YpeVJX8xxh@cluster0.c1qeutt.mongodb.net/?retryWrites=true&w=majority"
+const MONGODB_URI = process.env.MONGO_URI
 mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
