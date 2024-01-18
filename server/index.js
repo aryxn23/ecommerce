@@ -102,7 +102,8 @@ app.get('/user', async (req, res) => {
         const user = await User.findOne({ email });
 
         if (user) {
-            user.orders.sort((a, b) => b.orderDate - a.orderDate);
+            user.orders.sort((a, b) => b.orderDate.getTime() - a.orderDate.getTime());
+            console.log(user.orders);
             res.status(200).json({ ok: true, user });
         } else {
             res.status(404).json({ message: 'User not found' });
